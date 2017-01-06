@@ -1,0 +1,28 @@
+h1 {
+	font-family: Rockwell, "Courier Bold", Courier, Georgia, Times, "Times New Roman", serif;
+	font-size: 48px;
+	font-style: normal;
+	font-variant: normal;
+	font-weight: 500;
+	line-height: 26.4px;
+}
+
+#weather {
+	background: mediumpurple;
+}
+
+body {
+	background: slategrey;
+}
+
+#footer {
+   position:fixed;
+   left:0px;
+   bottom:0px;
+   height:30px;
+   width:100%;
+   background:#999;
+   text-align: center;
+   background: black;
+   color: mediumpurple;
+}
