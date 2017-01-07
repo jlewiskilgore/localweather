@@ -12,28 +12,31 @@ function getWeather(callback) {
 }
 
 getWeather(function(data) {
-	console.log('weather data received');
-	console.log(data.weather[0]);
-	console.log(data.main.temp);
-	console.log(data.name);
-
-	city = data.name;
-	temperature = data.main.temp;
-	conditionDescription = data.weather[0].description;
-	conditionIcon = data.weather[0].icon;
-	iconUrl = "http://openweathermap.org/img/w/" + conditionIcon + ".png";
-
-	console.log(conditionIcon);
-	console.log(iconUrl);
+	var city = data.name;
+	var temperature = data.main.temp * (9/5) - 459.67;
+	temperature = temperature.toFixed(2);
+	var conditionDescription = data.weather[0].description;
+	var conditionIcon = data.weather[0].icon;
+	var iconUrl = "http://openweathermap.org/img/w/" + conditionIcon + ".png";
 
 	//Update webpage
 	//document.getElementById("cityName").innerHTML = city;
-	document.getElementById("temp").innerHTML = "Temperature: "+temperature+ " K";
+	document.getElementById("temp").innerHTML = "Temperature: "+temperature+ " F";
 	document.getElementById("condition").innerHTML = conditionDescription;
 	$("#icon").html("<img src='" + iconUrl + "'>");
 })
 
-function convertTemperature(temp) {
-	console.log(document.getElementById("tempFarenheit").checked);
-	console.log(document.getElementById("tempCelcius").checked);
+function convertTemperature() {
+	var temp = document.getElementById("temp").innerHTML.split(" ")[1];
+	var units = document.getElementById("temp").innerHTML.split(" ")[2];
+	if(document.getElementById("tempFarenheit").checked && units == "C") {
+		temp = temp * (9/5) + 32;
+		temp = temp.toFixed(2);
+		document.getElementById("temp").innerHTML = "Temperature: "+temp+ " F";
+	}
+	else if(document.getElementById("tempCelcius").checked && units == "F"){
+		temp = (temp - 32) * (5/9);
+		temp = temp.toFixed(2);
+		document.getElementById("temp").innerHTML = "Temperature: "+temp+ " C";
+	}
 }
