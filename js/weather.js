@@ -1,9 +1,13 @@
 function getWeather(callback) {
-	var cityUrl = "http://api.openweathermap.org/data/2.5/weather?q=Dayton&APPID=2d96aa2f11bb940f0d22bd7dc64e3684";
-	$.ajax({
-		dataType: "jsonp",
-		url: cityUrl,
-		success: callback
+	$.getJSON('https://geoip-db.com/json/geoip.php?jsonp=?') 
+	.done (function(location){
+		$('#cityName').html(location.city);
+		var cityUrl = "http://api.openweathermap.org/data/2.5/weather?q=" + location.city + "&APPID=2d96aa2f11bb940f0d22bd7dc64e3684";
+		$.ajax({
+			dataType: "jsonp",
+			url: cityUrl,
+			success: callback
+		})
 	});
 }
 
@@ -23,8 +27,13 @@ getWeather(function(data) {
 	console.log(iconUrl);
 
 	//Update webpage
-	document.getElementById("cityName").innerHTML = "Weather for: "+city;
+	//document.getElementById("cityName").innerHTML = city;
 	document.getElementById("temp").innerHTML = "Temperature: "+temperature+ " K";
 	document.getElementById("condition").innerHTML = conditionDescription;
 	$("#icon").html("<img src='" + iconUrl + "'>");
 })
+
+function convertTemperature(temp) {
+	console.log(document.getElementById("tempFarenheit").checked);
+	console.log(document.getElementById("tempCelcius").checked);
+}
