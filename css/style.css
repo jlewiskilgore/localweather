@@ -40,3 +40,8 @@ body {
 	font-size: 32px;
 	padding: 20px;
 }
+
+img {
+	height: 200px;
+	width: 200px;
+}
